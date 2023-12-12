@@ -92,7 +92,7 @@ const SearchBar = () => {
   const pokemon = useSelector((state: RootState) => state.pokemon.pokemon);
   useEffect(() => {
     console.log("Poke:", pokemon);
-  }, [pokemon, , history]);
+  }, [pokemon]);
 
   return (
     <div
@@ -129,6 +129,3 @@ const SearchBar = () => {
 };
 
 export default SearchBar;
-function useHistory() {
-  throw new Error("Function not implemented.");
-}

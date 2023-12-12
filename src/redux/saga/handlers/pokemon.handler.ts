@@ -5,6 +5,8 @@ import {
   fetchOnePokemonSuccess,
   fetchListPokemonFailure,
   fetchListPokemonSuccess,
+  fetchOnePokemonIdSuccess,
+  fetchOnePokemonIdFailure,
 } from "../../slices/pokemonslice";
 
 import { getPokemon, getPokemonsList } from "../requests/pokemon.request";
@@ -38,11 +40,28 @@ export function* handleFetchPokemon(action: any): Generator<any, any, any> {
 
     const { status, data } = yield call(getPokemon, name);
     if (status === 200) {
+      console.log("Data found:", data);
       yield put(fetchOnePokemonSuccess({ pokemon: data }));
-      navigate("");
+      navigate(`/profilPokemon/${name}`);
     }
   } catch (e) {
     console.log("error while fetching pokemon by name", e);
     yield put(fetchOnePokemonFailure("Pokemon not found:"));
+  }
+}
+
+////////// Find  by id ////////
+export function* handleFetchPokemonById(action: any): Generator<any, any, any> {
+  try {
+    const { id } = action.payload;
+
+    const { status, data } = yield call(getPokemon, id);
+    if (status === 200) {
+      console.log("Data found:", data);
+      yield put(fetchOnePokemonIdSuccess({ pokemon: data }));
+    }
+  } catch (e) {
+    console.log("error while fetching pokemon by id", e);
+    yield put(fetchOnePokemonIdFailure("Pokemon not found:"));
   }
 }

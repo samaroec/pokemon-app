@@ -1,11 +1,20 @@
 import { Card, CardContent, CardMedia, Grid, Typography } from "@mui/material";
 import { RootState } from "../redux/store";
 import { baseImageUrl } from "../config";
-import { FC } from "react";
-import { useSelector } from "react-redux";
+import { FC, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
+import { fetchOnePokemonRequest } from "../redux/slices/pokemonslice";
 
-const ProfilPokemon: FC = () => {
+const ProfilPokemon: FC = (props) => {
+  const dispatch = useDispatch();
   const { pokemon } = useSelector((state: any) => state.pokemon);
+  const { name } = useParams();
+
+  useEffect(() => {
+    console.log("Pokemon found:", pokemon);
+  }, [pokemon]);
+
   return (
     <div style={{ padding: "25px" }}>
       <div>
